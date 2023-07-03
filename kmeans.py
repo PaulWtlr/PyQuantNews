@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 plt.rc("font", size=10)
 
-from openbb_terminal.sdk import openbb
+from openbb_terminal.api import openbb
 
 #Set up the data (Dow Jones stocks)
 dji = (
