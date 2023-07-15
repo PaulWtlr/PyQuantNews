@@ -1,6 +1,5 @@
 # Import the modules
 from math import sqrt
-
 import pandas as pd
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -13,10 +12,11 @@ dji = (
     pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1]
 )
 symbols = dji.Symbol.tolist()
+print(symbols)
 data = openbb.stocks.ca.hist(
     symbols, 
     start_date="2020-01-01",
-    end_date="2022-12-31"
+    end_date="2022-12-31"   
 )
 
 #Data preprocessing
@@ -39,6 +39,7 @@ for k in range(2, 15):
 
 plt.plot(range(2, 15), sse)
 plt.title("Elbow Curve");
+plt.show()
 
 # Build and plot the clusters 
 
@@ -55,3 +56,4 @@ for i in range(len(moments.index)):
     txt = f"{moments.index[i]} ({kmeans.labels_[i]})"
     xy = tuple(moments.iloc[i, :] + [0, 0.01])
     plt.annotate(txt, xy)
+plt.show()
