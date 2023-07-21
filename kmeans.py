@@ -9,11 +9,12 @@ from openbb_terminal.sdk import openbb
 
 #Set up the data (Dow Jones stocks)
 dji = (
-    pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1]
+    # collect the first table of the wikipedia Dow Jones page
+    pd.read_html('https://en.wikipedia.org/wiki/Dow_Jones_Industrial_Average')[1] 
 )
-symbols = dji.Symbol.tolist()
-print(symbols)
-data = openbb.stocks.ca.hist(
+symbols = dji.Symbol.tolist() # Create a list composed by the different values of the column Symbol (ie get a list of the DJ tickers)
+# use openbb terminal to access price history of the different companies 
+data = openbb.stocks.ca.hist( 
     symbols, 
     start_date="2020-01-01",
     end_date="2022-12-31"   
@@ -28,6 +29,7 @@ moments = (
     .T[["mean", "std"]]
     .rename(columns={"mean": "returns", "std": "vol"})
 ) * [252, sqrt(252)]
+# Are we missing the weights ? 
 
 #Do KMeans Clustering
 
